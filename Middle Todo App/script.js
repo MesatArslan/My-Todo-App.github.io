@@ -14,6 +14,7 @@ const firstH1 = document.querySelector(".firsth1");
 const titleText = document.querySelector(".title-text");
 const dateText = document.querySelector(".date-text");
 const descriptionText = document.querySelector(".description-text");
+const filterInput = document.querySelector("#input-field");
 
 const buttons = document.querySelectorAll('.language-section a');
 
@@ -106,7 +107,23 @@ const data = {
 
 
 //* filter part
+filterInput.addEventListener("keyup",filter);
+function filter(e){
+  const filterValue = e.target.value.toLowerCase().trim();
+  const todoList = document.querySelectorAll(".category-name");
 
+  if(todoList.length > 0){
+    todoList.forEach(todo => {
+        if(todo.textContent.toLowerCase().trim().includes(filterValue)){
+          todo.parentNode.setAttribute("style","display : block");
+        }else{
+          todo.parentNode.setAttribute("style","display : none");
+        }
+    });
+
+  }
+  
+}
 
 
 //* Taking Data Part
@@ -145,7 +162,7 @@ const updateTaskContainer = () => {
     ({ id, title, date, description }) => {
         (tasksContainer.innerHTML += `
         <div class="task" id="${id}">
-          <p><strong>${data[attr].taskFormTitle}:</strong> ${title}</p>
+          <p class="category-name"><strong>${data[attr].taskFormTitle}:</strong> ${title}</p>
           <p><strong>${data[attr].taskFormDate}:</strong> ${date}</p>
           <p><strong>${data[attr].taskFormDescription}:</strong> ${description}</p>
           <button onclick="editTask(this)" type="button" class="btn">${data[attr].editBtnText}</button>
