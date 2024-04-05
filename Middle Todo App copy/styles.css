@@ -1,7 +1,7 @@
 :root {
     --white: #fff;
     --light-grey: #FF204E;
-    --dark-grey: #000000;
+    --dark-grey: #000000c2;
     --red: #A0153E;
     --golden-red: #5D0E41;
   }
@@ -13,41 +13,6 @@
     padding: 0;
     box-sizing: border-box;
   }
-  
-  
-  .language-section {
-    top: auto;
-    bottom: 100%;
-    right: 0;
-    left: auto;
-
-  }
-  
-  .language-section a {
-    display: block;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #ffffff;
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .language-section a:hover {
-    background-color: #f0f0f0;
-  }
-  
-  .language-section a.active {
-    font-weight: bold;
-  }
-  
-  .language-section a:not(:last-child) {
-    margin-bottom: 5px;
-  }
-
-  
   
   body {
     background-color: var(--dark-grey);

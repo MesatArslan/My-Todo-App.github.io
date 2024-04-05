@@ -9,7 +9,106 @@ const tasksContainer = document.getElementById("tasks-container");
 const titleInput = document.getElementById("title-input");
 const dateInput = document.getElementById("date-input");
 const descriptionInput = document.getElementById("description-input");
+const languageSection = document.getElementById("language-section");
+const firstH1 = document.querySelector(".firsth1");
+const titleText = document.querySelector(".title-text");
+const dateText = document.querySelector(".date-text");
+const descriptionText = document.querySelector(".description-text");
 
+const buttons = document.querySelectorAll('.language-section a');
+
+buttons.forEach(button =>{
+  button.addEventListener('click', () => {
+    const activeElement = document.querySelector('.language-section .active');
+    if (activeElement) {
+      activeElement.classList.remove('active');
+    }
+
+    button.classList.add('active');
+
+    const attr = button.getAttribute("language");
+
+    openTaskFormBtn.textContent = data[attr].addTaskBtn;
+    addOrUpdateTaskBtn.textContent = data[attr].addTaskBtnText;
+    cancelBtn.textContent = data[attr].editBtnText;
+    discardBtn.textContent = data[attr].discardBtnText;
+    firstH1.textContent = data[attr].greeting;
+    dateInput.textContent = data[attr].taskFormDate;
+    titleText.textContent = data[attr].taskFormTitle;
+    dateText.textContent = data[attr].taskFormDate;
+    descriptionText.textContent = data[attr].taskFormDescription;
+    updateTaskContainer();
+   
+  });
+});
+
+
+
+
+
+//* Translate Part
+const data = {
+  'english': {
+      'greeting': 'My Todo App',
+      'addTaskBtn': 'Add New Task',
+      'taskFormTitle': 'Title',
+      'taskFormDate': 'Date',
+      'taskFormDescription': 'Description',
+      'addTaskBtnText': 'Add Task',
+      'discardChangesMessage': 'Discard unsaved changes?',
+      'editBtnText': 'Edit',
+      'discardBtnText': 'Discard'
+  },
+  'turkish': {
+      'greeting': 'Benim Todo Uygulamam',
+      'addTaskBtn': 'Yeni Görev Ekle',
+      'taskFormTitle': 'Başlık',
+      'taskFormDate': 'Tarih',
+      'taskFormDescription': 'Açıklama',
+      'addTaskBtnText': 'Görev Ekle',
+      'discardChangesMessage': 'Kaydedilmemiş değişiklikleri silmek istiyor musunuz?',
+      'editBtnText': 'Düzenle',
+      'discardBtnText': 'Sil'
+  },
+  'chinese': {
+      'greeting': '我的待办事项应用',
+      'addTaskBtn': '添加新任务',
+      'taskFormTitle': '标题',
+      'taskFormDate': '日期',
+      'taskFormDescription': '描述',
+      'addTaskBtnText': '添加任务',
+      'discardChangesMessage': '是否放弃未保存的更改？',
+      'editBtnText': '编辑',
+      'discardBtnText': '丢弃'
+  },
+  'russian': {
+      'greeting': 'Мое собственное приложение для задач',
+      'addTaskBtn': 'Добавить новую задачу',
+      'taskFormTitle': 'Заголовок',
+      'taskFormDate': 'Дата',
+      'taskFormDescription': 'Описание',
+      'addTaskBtnText': 'Добавить задачу',
+      'discardChangesMessage': 'Отменить несохраненные изменения?',
+      'editBtnText': 'Редактировать',
+      'discardBtnText': 'Удалить'
+  },
+  'japanese': {
+      'greeting': '私のToDoアプリ',
+      'addTaskBtn': '新しいタスクを追加',
+      'taskFormTitle': 'タイトル',
+      'taskFormDate': '日付',
+      'taskFormDescription': '説明',
+      'addTaskBtnText': 'タスクを追加',
+      'discardChangesMessage': '保存されていない変更を破棄しますか？',
+      'editBtnText': '編集する',
+      'discardBtnText': '破棄'
+  }
+};
+
+
+
+
+//* Taking Data Part
 const taskData = JSON.parse(localStorage.getItem("data")) || [];
 let currentTask = {};
 
@@ -22,6 +121,7 @@ const addOrUpdateTask = () => {
     date: dateInput.value,
     description: descriptionInput.value,
   };
+  
 
   if (dataArrIndex === -1) {
     taskData.unshift(taskObj);
@@ -32,25 +132,35 @@ const addOrUpdateTask = () => {
   localStorage.setItem("data", JSON.stringify(taskData));
   updateTaskContainer()
   reset()
+  
 };
 
 const updateTaskContainer = () => {
   tasksContainer.innerHTML = "";
+  const activeLanguage = document.querySelector('.language-section .active');
+  const attr = activeLanguage.getAttribute("language");
 
   taskData.forEach(
     ({ id, title, date, description }) => {
         (tasksContainer.innerHTML += `
         <div class="task" id="${id}">
-          <p><strong>Title:</strong> ${title}</p>
-          <p><strong>Date:</strong> ${date}</p>
-          <p><strong>Description:</strong> ${description}</p>
-          <button onclick="editTask(this)" type="button" class="btn">Edit</button>
-          <button onclick="deleteTask(this)" type="button" class="btn">Delete</button> 
+          <p><strong>${data[attr].taskFormTitle}:</strong> ${title}</p>
+          <p><strong>${data[attr].taskFormDate}:</strong> ${date}</p>
+          <p><strong>${data[attr].taskFormDescription}:</strong> ${description}</p>
+          <button onclick="editTask(this)" type="button" class="btn">${data[attr].editBtnText}</button>
+          <button onclick="deleteTask(this)" type="button" class="btn">${data[attr].discardBtnText}</button> 
         </div>
       `)
+      
     }
+      
   );
+      
+
 };
+
+updateTaskContainer();
+
 
 
 const deleteTask = (buttonEl) => {
