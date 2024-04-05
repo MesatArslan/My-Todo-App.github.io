@@ -14,13 +14,38 @@
     box-sizing: border-box;
   }
   
-  
-  .language-section {
-    top: auto;
-    bottom: 100%;
-    right: 0;
-    left: auto;
+  .language-part {
+    width: 40px;
+    height: 41px;
+    position: absolute;
+    top: 3%;
+    right: 1%;
+    background-color: #A0153E;
+    border: none;
+    border-radius: 50%; 
+    color: #fff; 
+    font-size: 18px; 
+    font-weight: bold; 
+    text-align: center;
+    line-height: 20px;
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+  }
 
+   
+  
+  
+  .language-part:hover .language-section{
+    display:block;
+    background-color: #75102D;
+    z-index: 1;
+  }
+  .language-section {
+    display: none;
+    position: absolute;
+    border-radius: 10px;
+    top: 2;
+    right: 1%;
   }
   
   .language-section a {
@@ -30,6 +55,7 @@
     color: #ffffff;
     background-color: transparent;
     border: none;
+    border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s ease;

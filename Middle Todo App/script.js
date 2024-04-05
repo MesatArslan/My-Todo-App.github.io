@@ -17,6 +17,8 @@ const descriptionText = document.querySelector(".description-text");
 
 const buttons = document.querySelectorAll('.language-section a');
 
+
+//* Translate Part function
 buttons.forEach(button =>{
   button.addEventListener('click', () => {
     const activeElement = document.querySelector('.language-section .active');
@@ -43,10 +45,7 @@ buttons.forEach(button =>{
 });
 
 
-
-
-
-//* Translate Part
+//* Translate Part data
 const data = {
   'english': {
       'greeting': 'My Todo App',
@@ -105,6 +104,8 @@ const data = {
   }
 };
 
+
+//* filter part
 
 
 
