@@ -33,8 +33,20 @@
         Add New Task
       </button>
       <div class="input-container">
-        <input type="text" id="input-field" placeholder="Bir şeyler yazın...">
+        <input type="text" id="input-field" placeholder="Search Something...">
       </div>
+      <div class="category-part-main">
+        <label class="category-label">All</label>
+        <div class="category-section-main">
+            <a href="#" category='all' class="active" id="all">All</a>
+            <a href="#" category='personal'  id="personal1">Personal</a>
+            <a href="#" category='travel' id="travel1">Travel</a>
+            <a href="#" category='work' id="work1">Work</a>
+            <a href="#" category='education' id="education1">Education</a>
+            <a href="#" category='training' id="training1">Traning</a>
+        </div>
+    </div>
+    
       <form class="task-form hidden" id="task-form">
         <div class="task-form-header">
           <button id="close-task-form-btn" class="close-task-form-btn" type="button" aria-label="close">
@@ -48,11 +60,11 @@
           <div class="category-part">
             <label class="task-form-label">Category</label>
             <div class="category-section">
-              <a href="#" category='personal' class="active">Personal</a>
-              <a href="#" category='Travel'>Travel</a>
-              <a href="#" category='work'>Work</a>
-              <a href="#" category='school'>Education</a>
-              <a href="#" category='traning'>Traning</a>
+              <a href="#" category='personal' class="active" id="personal">Personal</a>
+              <a href="#" category='travel' id="travel">Travel</a>
+              <a href="#" category='work' id="work">Work</a>
+              <a href="#" category='education' id="education">Education</a>
+              <a href="#" category='training' id="training">Traning</a>
             </div>
           </div>
           <label class="task-form-label title-text" for="title-input">Title</label>

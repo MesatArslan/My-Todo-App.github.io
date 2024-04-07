@@ -14,10 +14,24 @@ const firstH1 = document.querySelector(".firsth1");
 const titleText = document.querySelector(".title-text");
 const dateText = document.querySelector(".date-text");
 const descriptionText = document.querySelector(".description-text");
+const categoryText = document.querySelector(".category-label");
+const secondCategoryText = document.querySelector(".task-form-label");
 const filterInput = document.querySelector("#input-field");
 const categories = document.querySelectorAll(".category-section a");
-
+const categoryLinks = document.querySelectorAll('.category-section-main a');
 const buttons = document.querySelectorAll('.language-section a');
+const allText = document.querySelector('#all');
+const personal1Text = document.querySelector('#personal1');
+const travel1Text = document.querySelector('#travel1');
+const work1Text = document.querySelector('#work1');
+const education1Text = document.querySelector('#education1');
+const training1Text = document.querySelector('#training1');
+const personalText = document.querySelector('#personal');
+const travelText = document.querySelector('#travel');
+const workText = document.querySelector('#work');
+const educationText = document.querySelector('#education');
+const trainingText = document.querySelector('#training');
+const inputFieldText = document.getElementById('input-field');
 
 //* Category filter part
 categories.forEach(category => {
@@ -26,11 +40,41 @@ categories.forEach(category => {
     if (activeElement) {
       activeElement.classList.remove('active');
     }
-
     category.classList.add('active');
   });
   
 });
+
+//* Category Part and filter
+categoryLinks.forEach(link => {
+    link.addEventListener('click', function(event) {
+        event.preventDefault(); 
+        categoryLinks.forEach(link => link.classList.remove('active'));
+        this.classList.add('active')
+        
+        const categoryFilter = document.querySelector(".category-section-main a.active");
+        const categoryFilterValue = categoryFilter.textContent;
+        const categoryTodoList = document.querySelectorAll(".category");
+        const categoryLabel = document.querySelector('.category-label');
+        categoryLabel.textContent = categoryFilter.textContent;
+        
+        if(categoryTodoList.length > 0){
+          categoryTodoList.forEach(todo => {
+            if(categoryFilterValue == 'All'){
+              todo.parentNode.style.display = 'block';
+
+            }else if (todo.textContent.includes(categoryFilterValue)) {
+                todo.parentNode.style.display = 'block';
+                console.log(todo.textContent, "=== ",categoryFilterValue);
+            } else {
+                todo.parentNode.style.display = 'none';
+                console.log(todo.textContent ,"??",categoryFilterValue);
+            }
+          });
+        }
+    });
+});
+
 
 //* Translate Part function
 buttons.forEach(button =>{
@@ -53,6 +97,21 @@ buttons.forEach(button =>{
     titleText.textContent = data[attr].taskFormTitle;
     dateText.textContent = data[attr].taskFormDate;
     descriptionText.textContent = data[attr].taskFormDescription;
+    categoryText.textContent = data[attr].allText;
+    inputFieldText.placeholder = data[attr].inputFieldText;
+    secondCategoryText.textContent = data[attr].categoryText;
+    allText.textContent = data[attr].allText;
+    personal1Text.textContent = data[attr].personalText;
+    travel1Text.textContent = data[attr].travelText;
+    work1Text.textContent = data[attr].workText;
+    education1Text.textContent = data[attr].educationText;
+    training1Text.textContent = data[attr].trainingText;
+    personalText.textContent = data[attr].personalText;
+    travelText.textContent = data[attr].travelText;
+    workText.textContent = data[attr].workText;
+    educationText.textContent = data[attr].educationText;
+    trainingText.textContent = data[attr].trainingText;
+
     updateTaskContainer();
    
   });
@@ -70,7 +129,15 @@ const data = {
       'addTaskBtnText': 'Add Task',
       'discardChangesMessage': 'Discard unsaved changes?',
       'editBtnText': 'Edit',
-      'discardBtnText': 'Discard'
+      'discardBtnText': 'Discard',
+      'categoryText':'Category',
+      'allText': 'All',
+      'personalText': 'Personal',
+      'travelText': 'Travel',
+      'workText': 'Work',
+      'educationText': 'Education',
+      'trainingText': 'Training',
+      'inputFieldText':'Search Something...'
   },
   'turkish': {
       'greeting': 'Benim Todo Uygulamam',
@@ -81,7 +148,16 @@ const data = {
       'addTaskBtnText': 'Görev Ekle',
       'discardChangesMessage': 'Kaydedilmemiş değişiklikleri silmek istiyor musunuz?',
       'editBtnText': 'Düzenle',
-      'discardBtnText': 'Sil'
+      'discardBtnText': 'Sil',
+      'categoryText':'Kategori',
+      'allText': 'Tümü',
+      'personalText': 'Kişisel',
+      'travelText': 'Seyahat',
+      'workText': 'Çalışma',
+      'educationText': 'Eğitim',
+      'trainingText': 'Antrenman',
+      'inputFieldText':'Bir şeyler ara...'
+
   },
   'chinese': {
       'greeting': '我的待办事项应用',
@@ -92,7 +168,17 @@ const data = {
       'addTaskBtnText': '添加任务',
       'discardChangesMessage': '是否放弃未保存的更改？',
       'editBtnText': '编辑',
-      'discardBtnText': '丢弃'
+      'discardBtnText': '丢弃',
+      'categoryText':'类别',
+      'allText': '全部',
+      'personalText': '个人',
+      'travelText': '旅行',
+      'workText': '工作',
+      'educationText': '教育',
+      'trainingText': '培训',
+      'inputFieldText':'搜索一些东西...'
+
+
   },
   'russian': {
       'greeting': 'Мое собственное приложение для задач',
@@ -103,7 +189,16 @@ const data = {
       'addTaskBtnText': 'Добавить задачу',
       'discardChangesMessage': 'Отменить несохраненные изменения?',
       'editBtnText': 'Редактировать',
-      'discardBtnText': 'Удалить'
+      'discardBtnText': 'Удалить',
+      'categoryText':'Kатегория',
+      'allText': 'Все',
+      'personalText': 'Личный',
+      'travelText': 'Путешествие',
+      'workText': 'Работа',
+      'educationText': 'Образование',
+      'trainingText': 'Обучение',
+      'inputFieldText':'Искать что-то...'
+
   },
   'japanese': {
       'greeting': '私のToDoアプリ',
@@ -114,7 +209,16 @@ const data = {
       'addTaskBtnText': 'タスクを追加',
       'discardChangesMessage': '保存されていない変更を破棄しますか？',
       'editBtnText': '編集する',
-      'discardBtnText': '破棄'
+      'discardBtnText': '破棄',
+      'categoryText':'カテゴリー',
+      'allText': 'すべて',
+      'personalText': '個人',
+      'travelText': '旅行',
+      'workText': '仕事',
+      'educationText': '教育',
+      'trainingText': 'トレーニング',
+      'inputFieldText':'何かを検索...'
+
   }
 };
 
@@ -133,10 +237,9 @@ function filter(e){
           todo.parentNode.setAttribute("style","display : none");
         }
     });
-
   }
-  
 }
+
 
 
 //* Taking Data Part
@@ -215,18 +318,17 @@ const editTask = (buttonEl) => {
 
   
   currentTask = taskData[dataArrIndex];
-  categories.forEach(categoryy => {
-    const activeCategory = document.querySelector('.category-section .active');
-    if (activeCategory) {
-      activeCategory.classList.remove('active');
-    }
-});
-
-categories.forEach(categoryy => {
-  if(currentTask.category === categoryy.textContent){
-    categoryy.classList.add('active');
+  const activeCategory = document.querySelector('.category-section .active');
+  if (activeCategory) {
+    activeCategory.classList.remove('active');
   }
-});
+  
+
+  categories.forEach(categoryy => {
+    if(currentTask.category === categoryy.textContent){
+      categoryy.classList.add('active');
+    }
+  });
   titleInput.value = currentTask.title;
   dateInput.value = currentTask.date;
   descriptionInput.value = currentTask.description;
