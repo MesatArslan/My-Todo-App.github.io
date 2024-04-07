@@ -26,6 +26,7 @@
     margin-right: 10px;
     width: 200px;
   }
+
   .language-part {
     width: 40px;
     height: 41px;
@@ -43,8 +44,45 @@
     cursor: pointer; 
     transition: background-color 0.3s ease; 
   }
+  
+  .category-part {
+    margin-bottom: 20px;
+  }
+  
+  .task-form-label {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .category-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .category-section a {
+    display: inline-block;
+    padding: 8px 12px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ee0000;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000000;
+    background-color: #00b7ff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .category-section a:hover {
+    background-color: #ec0000;
+    color: #fff;
 
-   
+  }
+  .category-section a.active{
+    background-color: #ec0000;
+    color: #fff;
+  }
   
   
   .language-part:hover .language-section{

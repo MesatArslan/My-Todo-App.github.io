@@ -15,9 +15,22 @@ const titleText = document.querySelector(".title-text");
 const dateText = document.querySelector(".date-text");
 const descriptionText = document.querySelector(".description-text");
 const filterInput = document.querySelector("#input-field");
+const categories = document.querySelectorAll(".category-section a");
 
 const buttons = document.querySelectorAll('.language-section a');
 
+//* Category filter part
+categories.forEach(category => {
+  category.addEventListener('click', () => {
+    const activeElement = document.querySelector('.category-section .active');
+    if (activeElement) {
+      activeElement.classList.remove('active');
+    }
+
+    category.classList.add('active');
+  });
+  
+});
 
 //* Translate Part function
 buttons.forEach(button =>{
@@ -106,7 +119,7 @@ const data = {
 };
 
 
-//* filter part
+//* Title filter part
 filterInput.addEventListener("keyup",filter);
 function filter(e){
   const filterValue = e.target.value.toLowerCase().trim();
@@ -133,8 +146,11 @@ let currentTask = {};
 const addOrUpdateTask = () => {
   addOrUpdateTaskBtn.innerText = "Add Task";
   const dataArrIndex = taskData.findIndex((item) => item.id === currentTask.id);
+  const categoryInput = document.querySelector(".category-section a.active");
+
   const taskObj = {
     id: `${titleInput.value.toLowerCase().split(" ").join("-")}-${Date.now()}`,
+    category: categoryInput.textContent,
     title: titleInput.value,
     date: dateInput.value,
     description: descriptionInput.value,
@@ -159,10 +175,11 @@ const updateTaskContainer = () => {
   const attr = activeLanguage.getAttribute("language");
 
   taskData.forEach(
-    ({ id, title, date, description }) => {
+    ({ id,category, title, date, description }) => {
         (tasksContainer.innerHTML += `
         <div class="task" id="${id}">
           <p class="category-name"><strong>${data[attr].taskFormTitle}:</strong> ${title}</p>
+          <p class="category"><strong>${data[attr].categoryText}:</strong> ${category}</p>
           <p><strong>${data[attr].taskFormDate}:</strong> ${date}</p>
           <p><strong>${data[attr].taskFormDescription}:</strong> ${description}</p>
           <button onclick="editTask(this)" type="button" class="btn">${data[attr].editBtnText}</button>
@@ -196,8 +213,20 @@ const editTask = (buttonEl) => {
     (item) => item.id === buttonEl.parentElement.id
   );
 
+  
   currentTask = taskData[dataArrIndex];
+  categories.forEach(categoryy => {
+    const activeCategory = document.querySelector('.category-section .active');
+    if (activeCategory) {
+      activeCategory.classList.remove('active');
+    }
+});
 
+categories.forEach(categoryy => {
+  if(currentTask.category === categoryy.textContent){
+    categoryy.classList.add('active');
+  }
+});
   titleInput.value = currentTask.title;
   dateInput.value = currentTask.date;
   descriptionInput.value = currentTask.description;
